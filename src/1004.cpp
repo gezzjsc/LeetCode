@@ -51,3 +51,25 @@ int longestOnes(std::vector<int>& A, int K) {
     }
     return max_length;
 }
+
+/**
+ * 滑动窗口的思想
+ * @param A
+ * @param K
+ * @return
+ */
+int longestOnesV2(std::vector<int>& A, int K) {
+    int begin_idx = 0, end_idx = 0;
+    int zero_cnt = 0;
+    while(end_idx < A.size()) {
+        if (A[end_idx] == 0) {
+            zero_cnt++;
+        }
+        end_idx++;
+        if (zero_cnt > K) {
+            if (A[begin_idx] == 0) zero_cnt--;
+            begin_idx++;
+        }
+    }
+    return end_idx - begin_idx;
+}
